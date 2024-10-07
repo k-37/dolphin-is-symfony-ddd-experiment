@@ -4,6 +4,45 @@ This repository is used to practice [Symfony](https://en.wikipedia.org/wiki/Symf
 
     - [Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
 
+> [!NOTE]
+> The project is developed on [Debian 12](https://www.debian.org/) if you use another OS have that in mind if something doesn't work as expected.
+
+# Install Symfony
+
+After cloning current repository to build Docker images in the project root execute:
+
+    docker compose build --pull --no-cache
+
+To install Symfony:
+
+    docker compose up --pull always --detach --wait
+
+# Usage
+
+After installation app should be available at [localhost](https://localhost/). [For the users of the other browser here is explanation how to accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334). Or go against the grain and get [Firefox](https://www.mozilla.org/en-US/firefox/).
+
+### Start Docker containers
+
+    docker compose up --detach
+
+### Stop Docker containers
+
+    docker compose down --remove-orphans
+
+### Rebuild Docker environment
+
+    docker compose down --remove-orphans && docker compose build --pull --no-cache
+
+# Troubleshooting
+
+### Permissions outside container
+
+On GNU/Linux after installation `git diff` will complain `...Not a git repository...`, because files created inside container will have ownership set to `root` user, to fix that we need to set ownership to the current user outside container with command:
+
+    docker compose run --rm php chown -R $(id -u):$(id -g) .
+
+as explained [here](https://github.com/dunglas/symfony-docker/blob/6b37be14c98583e202cbbdec380c6e9e3103d2ab/docs/troubleshooting.md#editing-permissions-on-linux).
+
 # Acknowledgements
 
 Everything here is heavily influenced by these great projects:
