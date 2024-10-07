@@ -3,6 +3,7 @@ This repository is used to practice [Symfony](https://en.wikipedia.org/wiki/Symf
 # Requirements
 
     - [Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
+    - If you are using Windows, you have to install [chocolatey.org](https://chocolatey.org/) or [Cygwin](http://cygwin.com) to use the `make` command. Check out this [StackOverflow question](https://stackoverflow.com/q/2532234/633864) for more explanations.
 
 > [!NOTE]
 > The project is developed on [Debian 12](https://www.debian.org/) if you use another OS have that in mind if something doesn't work as expected.
@@ -11,27 +12,25 @@ This repository is used to practice [Symfony](https://en.wikipedia.org/wiki/Symf
 
 After cloning current repository to build Docker images in the project root execute:
 
-    docker compose build --pull --no-cache
+    make build
 
 To install Symfony:
 
-    docker compose up --pull always --detach --wait
+    make up
 
 # Usage
 
 After installation app should be available at [localhost](http://localhost/).
 
-### Start Docker containers
-
-    docker compose up --detach
-
-### Stop Docker containers
-
-    docker compose down --remove-orphans
-
-### Rebuild Docker environment
-
-    docker compose down --remove-orphans && docker compose build --pull --no-cache
+|           Action            |    Command     |
+|-----------------------------|----------------|
+| Start containers            | `make up`      |
+| Stop containers             | `make down`    |
+| Rebuild containers          | `make rebuild` |
+| Show live logs              | `make logs`    |
+| Get Bash shell in container | `make bash`    |
+| Clear the cache             | `make cc`      |
+| Start tests with phpunit    | `make test`    |
 
 # Debugging
 
