@@ -19,7 +19,7 @@ To install Symfony:
 
 # Usage
 
-After installation app should be available at [localhost](https://localhost/). [For the users of the other browser here is explanation how to accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334). Or go against the grain and get [Firefox](https://www.mozilla.org/en-US/firefox/).
+After installation app should be available at [localhost](http://localhost/).
 
 ### Start Docker containers
 
@@ -32,6 +32,11 @@ After installation app should be available at [localhost](https://localhost/). [
 ### Rebuild Docker environment
 
     docker compose down --remove-orphans && docker compose build --pull --no-cache
+
+# Debugging
+
+- [Debugging with Xdebug and PHPStorm](https://github.com/dunglas/symfony-docker/blob/6b37be14c98583e202cbbdec380c6e9e3103d2ab/docs/xdebug.md#debugging-with-xdebug-and-phpstorm)
+- [PhpStorm ❤ Docker](https://medium.com/the-sensiolabs-tech-blog/phpstorm-docker-ccc4ce9a0b8e)
 
 # Troubleshooting
 
