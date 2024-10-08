@@ -10,29 +10,33 @@ This repository is used to practice [Symfony](https://en.wikipedia.org/wiki/Symf
 
 # Install Symfony
 
-After cloning current repository to build Docker images in the project root execute:
+To build Docker images, after cloning current repository in the project root execute:
 
     make build
 
-To install Symfony:
+To install Symfony inside Docker container and start the application:
 
     make up
+
+`make up` will install Symfony only if it is not already installed.
 
 # Usage
 
 After installation app should be available at [http://localhost/](http://localhost/).
 
-### Commands
+### Commands which can be executed from the project root folder
 
-|           Action            |    Command     |
-|-----------------------------|----------------|
-| Start containers            | `make up`      |
-| Stop containers             | `make down`    |
-| Rebuild containers          | `make rebuild` |
-| Show live logs              | `make logs`    |
-| Get Bash shell in container | `make bash`    |
-| Clear the cache             | `make cc`      |
-| Start tests with phpunit    | `make test`    |
+|              Action              |                  Command                   |
+|----------------------------------|--------------------------------------------|
+| Start containers                 | `make up`                                  |
+| Stop containers                  | `make down`                                |
+| Rebuild and start the containers | `make rebuild`                             |
+| Restart the containers           | `make restart`                             |
+| Show live logs                   | `make logs`                                |
+| Get Bash shell in container      | `make bash`                                |
+| Clear the cache                  | `make cc`                                  |
+| Start tests with phpunit         | `make test`                                |
+| Install composer package         | `make composer c='require <PACKAGE_NAME>'` |
 
 # Debugging
 

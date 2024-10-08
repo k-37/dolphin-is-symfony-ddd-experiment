@@ -11,7 +11,7 @@ SYMFONY  = $(PHP) bin/console
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        : help build up start down logs sh composer vendor sf cc test
+.PHONY        : help build up down rebuild restart logs sh composer vendor sf cc test
 
 ## —— 🎵 🐳 The Symfony Docker Makefile 🐳 🎵 ——————————————————————————————————
 help: ## Outputs this help screen
@@ -24,12 +24,12 @@ build: ## Builds the Docker images
 up: ## Start the docker hub in detached mode (no logs)
 	@$(DOCKER_COMP) up --detach
 
-start: build up ## Build and start the containers
-
-rebuild: down start ## Rebuild and start the containers
-
 down: ## Stop the docker hub
 	@$(DOCKER_COMP) down --remove-orphans
+
+rebuild: down build up ## Rebuild and start the containers
+
+restart: down up ## Restart the containers
 
 logs: ## Show live logs
 	@$(DOCKER_COMP) logs --tail=0 --follow
