@@ -2,8 +2,8 @@ This repository is used to practice [Symfony](https://en.wikipedia.org/wiki/Symf
 
 # Requirements
 
-    - [Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
-    - If you are using Windows, you have to install [chocolatey.org](https://chocolatey.org/) or [Cygwin](http://cygwin.com) to use the `make` command. Check out this [StackOverflow question](https://stackoverflow.com/q/2532234/633864) for more explanations.
+- [Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
+- If you are using Windows, you have to install [chocolatey.org](https://chocolatey.org/) or [Cygwin](http://cygwin.com) to use the `make` command. Check out this [StackOverflow question](https://stackoverflow.com/q/2532234/633864) for more explanations.
 
 > [!NOTE]
 > The project is developed on [Debian 12](https://www.debian.org/) if you use another OS have that in mind if something doesn't work as expected.
