@@ -73,6 +73,7 @@ Everything here is heavily influenced by these great projects:
 - [Symfony: The Fast Track](https://symfony.com/book)
 - [Symfony Documentation](https://symfony.com/doc/current/index.html)
 - [Symfony Docker](https://github.com/dunglas/symfony-docker)
+- [jorge07/symfony-6-es-cqrs-boilerplate](https://github.com/jorge07/symfony-6-es-cqrs-boilerplate)
 
 Big thank you for all the ~~fish~~ lessons goes to them. 🙏
 
