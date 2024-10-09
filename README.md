@@ -26,17 +26,19 @@ After installation app should be available at [http://localhost/](http://localho
 
 ### Commands which can be executed from the project root folder
 
-|              Action              |                  Command                   |
-|----------------------------------|--------------------------------------------|
-| Start containers                 | `make up`                                  |
-| Stop containers                  | `make down`                                |
-| Rebuild and start the containers | `make rebuild`                             |
-| Restart the containers           | `make restart`                             |
-| Show live logs                   | `make logs`                                |
-| Get Bash shell in container      | `make bash`                                |
-| Clear the cache                  | `make cc`                                  |
-| Start tests with phpunit         | `make test`                                |
-| Install composer package         | `make composer c='require <PACKAGE_NAME>'` |
+|                    Action                     |                  Command                   |
+|-----------------------------------------------|--------------------------------------------|
+| List all commands                             | `make help`                                |
+| Start containers                              | `make up`                                  |
+| Stop containers                               | `make down`                                |
+| Rebuild and start the containers              | `make rebuild`                             |
+| Restart the containers                        | `make restart`                             |
+| Show live logs                                | `make logs`                                |
+| Get Bash shell in container                   | `make bash`                                |
+| Clear the cache                               | `make cc`                                  |
+| Start tests with phpunit                      | `make test`                                |
+| Install composer package                      | `make composer c='require <PACKAGE_NAME>'` |
+| Take ownership of files outside the container | `make ownership`                           |
 
 # PhpStorm
 
@@ -59,6 +61,10 @@ After installation app should be available at [http://localhost/](http://localho
 As explained [here](https://github.com/dunglas/symfony-docker/blob/6b37be14c98583e202cbbdec380c6e9e3103d2ab/docs/troubleshooting.md#editing-permissions-on-linux), on GNU/Linux after installing Symfony `git diff` will complain `...Not a git repository...`, because files created inside container will have ownership set to `root` user, to fix that we need to set ownership to the current user outside the container with command:
 
     docker compose run --rm php chown -R $(id -u):$(id -g) .
+
+or:
+
+    make ownership
 
 # Acknowledgements
 

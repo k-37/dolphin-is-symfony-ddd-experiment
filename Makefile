@@ -11,7 +11,7 @@ SYMFONY  = $(PHP) bin/console
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        : help build up down rebuild restart logs sh composer vendor sf cc test
+.PHONY        : help build up down rebuild restart ownership logs sh composer vendor sf cc test
 
 ## —— 🎵 🐳 The Symfony Docker Makefile 🐳 🎵 ——————————————————————————————————
 help: ## Outputs this help screen
@@ -30,6 +30,9 @@ down: ## Stop the docker hub
 rebuild: down build up ## Rebuild and start the containers
 
 restart: down up ## Restart the containers
+
+ownership: ## Take ownership of files outside the container
+	@$(DOCKER_COMP) run --rm php chown -R $$(id -u):$$(id -g) .
 
 logs: ## Show live logs
 	@$(DOCKER_COMP) logs --tail=0 --follow
