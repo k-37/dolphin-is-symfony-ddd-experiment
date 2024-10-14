@@ -39,20 +39,21 @@ Credentials:
 
 ### Commands which can be executed from the project root folder
 
-|                         Action                          |                  Command                   |
-|---------------------------------------------------------|--------------------------------------------|
-| List all commands                                       | `make help`                                |
-| Start containers                                        | `make up`                                  |
-| Stop containers                                         | `make down`                                |
-| Rebuild and start the containers                        | `make rebuild`                             |
-| Restart the containers                                  | `make restart`                             |
-| Show live logs                                          | `make logs`                                |
-| Get Bash shell in container                             | `make bash`                                |
-| Clear the cache                                         | `make cc`                                  |
-| Start tests with phpunit                                | `make test`                                |
-| Install composer package                                | `make composer c='require <PACKAGE_NAME>'` |
-| Take ownership of files outside the container           | `make ownership`                           |
-| Remove all the containers, networks, volumes and images | `make destroy`                             |
+|                         Action                          |                      Command                      |
+|---------------------------------------------------------|---------------------------------------------------|
+| List all commands                                       | `make help`                                       |
+| Start containers                                        | `make up`                                         |
+| Stop containers                                         | `make down`                                       |
+| Rebuild and start the containers                        | `make rebuild`                                    |
+| Restart the containers                                  | `make restart`                                    |
+| Show live logs                                          | `make logs`                                       |
+| Get Bash shell in container                             | `make bash`                                       |
+| Clear the cache                                         | `make cc`                                         |
+| Start tests with phpunit                                | `make test`                                       |
+| Install composer package                                | `make composer c='require <PACKAGE_NAME>'`        |
+| Take ownership of files outside the container           | `make ownership`                                  |
+| Remove all the containers, networks, volumes and images | `make destroy`                                    |
+| Execute Symfony console command                         | `make sf c='<COMMAND>'`, e.g. `make sf c='about'` |
 
 # PhpStorm
 
