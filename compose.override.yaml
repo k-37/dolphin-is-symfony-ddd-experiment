@@ -33,6 +33,27 @@ services:
       - ./var/docker/db/data:/var/lib/postgresql/data:rw
 ###< doctrine/doctrine-bundle ###
 
+  database_management:
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    # environment:
+    #   PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: 10
+    volumes:
+      - database_management:/var/lib/pgadmin:rw
+      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+      # It might not work if `pgadmin` user with `uid=5050` which is used in contaner can't write in that directory on host file system.
+      # - ./var/docker/db_mng:/var/lib/pgadmin:rw
+      - ./etc/dev/pgadmin/config_local.py:/pgadmin4/config_local.py:ro
+      - ./etc/dev/pgadmin/pgpass:/pgadmin4/pgpass:ro
+      - ./etc/dev/pgadmin/servers.json:/pgadmin4/servers.json:ro
+    entrypoint: >
+      /bin/sh -c "
+      cp -f /pgadmin4/pgpass /var/lib/pgadmin/;
+      chmod 600 /var/lib/pgadmin/pgpass;
+      chown pgadmin:root /var/lib/pgadmin/pgpass;
+      /entrypoint.sh
+      "
+
 ###> symfony/mailer ###
   mailer:
     image: axllent/mailpit

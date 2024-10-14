@@ -26,6 +26,17 @@ To install Symfony inside Docker container and start the application:
 
 After installation app should be available at [http://localhost/](http://localhost/).
 
+### Services
+
+##### [pgAdmin](https://www.pgadmin.org/) - administration and development platform for PostgreSQL
+
+It is available at [http://localhost:5050/](http://localhost:5050/), please wait for it, it takes some time to become active.
+
+Credentials:
+
+- `Email Address / Username`: `admin@example.com`
+- `Password`: `!ChangeMe!`
+
 ### Commands which can be executed from the project root folder
 
 |                         Action                          |                  Command                   |

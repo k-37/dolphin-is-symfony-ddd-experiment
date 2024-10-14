@@ -50,6 +50,21 @@ services:
       # - ./docker/db/data:/var/lib/postgresql/data:rw
 ###< doctrine/doctrine-bundle ###
 
+  database_management:
+    image: dpage/pgadmin4:${PGADMIN_VERSION:-8.12.0}
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@example.com}
+      # You should definitely change the password in production
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-!ChangeMe!}
+      PGADMIN_ENABLE_TLS: ${PGADMIN_ENABLE_TLS:-}
+      PGADMIN_DISABLE_POSTFIX: ${PGADMIN_DISABLE_POSTFIX:-True}
+      PGADMIN_CONFIG_SERVER_MODE: ${PGADMIN_CONFIG_SERVER_MODE:-True}
+    volumes:
+      - database_management:/var/lib/pgadmin:rw
+      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+      # It might not work if `pgadmin` user with `uid=5050` which is used in contaner can't write in that directory on host file system.
+      # - ./docker/db_mng:/var/lib/pgadmin:rw
+
 volumes:
   caddy_data:
   caddy_config:
@@ -59,3 +74,5 @@ volumes:
 ###> doctrine/doctrine-bundle ###
   database_data:
 ###< doctrine/doctrine-bundle ###
+
+  database_management:
