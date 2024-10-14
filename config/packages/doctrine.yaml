@@ -1,13 +1,15 @@
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
-
-        # IMPORTANT: You MUST configure your server version,
-        # either here or in the DATABASE_URL env var (see .env file)
-        #server_version: '16'
-
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
+        types:
+          uuid_binary: Ramsey\Uuid\Doctrine\UuidBinaryType
+          datetime_immutable: App\Shared\Infrastructure\Persistence\Doctrine\Types\DateTimeType
+          email: App\Shared\Infrastructure\Persistence\Doctrine\Types\EmailType
+          hashed_password: App\Shared\Infrastructure\Persistence\Doctrine\Types\HashedPasswordType
+        mapping_types:
+          uuid_binary: binary
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true
@@ -16,11 +18,11 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            App:
-                type: attribute
+            User:
+                type: xml
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/App/Shared/Infrastructure/Persistance/Doctrine/Entity'
-                prefix: 'App\Shared\Infrastructure\Persistance\Doctrine\Entity'
+                dir: '%kernel.project_dir%/config/packages/doctrine/mapping/user'
+                prefix: 'App\User'
                 alias: App
 
 when@test:

@@ -1,4 +1,5 @@
 doctrine_migrations:
+    services:
+        Doctrine\Migrations\Version\MigrationFactory: 'App\Shared\Infrastructure\Persistence\Doctrine\MigrationsFactory\ContainerAwareFactory'
     migrations_paths:
-        'DoctrineMigrations': '%kernel.project_dir%/App/Shared/Infrastructure/Persistance/Doctrine/Migrations'
-    enable_profiler: false
+        App\Shared\Infrastructure\Persistence\Doctrine\Migrations: '%kernel.project_dir%/src/App/Shared/Infrastructure/Persistence/Doctrine/Migrations'
