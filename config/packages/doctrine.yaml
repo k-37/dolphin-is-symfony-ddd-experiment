@@ -4,12 +4,12 @@ doctrine:
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
         types:
-          uuid_binary: Ramsey\Uuid\Doctrine\UuidBinaryType
+          uuid: Ramsey\Uuid\Doctrine\UuidType
           datetime_immutable: App\Shared\Infrastructure\Persistence\Doctrine\Types\DateTimeType
           email: App\Shared\Infrastructure\Persistence\Doctrine\Types\EmailType
           hashed_password: App\Shared\Infrastructure\Persistence\Doctrine\Types\HashedPasswordType
         mapping_types:
-          uuid_binary: binary
+          uuid: uuid
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true
