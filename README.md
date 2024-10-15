@@ -18,7 +18,7 @@ To build Docker images, after cloning current repository in the project root exe
 
 To install Symfony inside Docker container and start the application:
 
-    make up
+    make up logs
 
 `make up` will install Symfony only if it is not already installed.
 
@@ -30,7 +30,7 @@ After installation app should be available at [http://localhost/](http://localho
 
 ##### [pgAdmin](https://www.pgadmin.org/) - administration and development platform for PostgreSQL
 
-It is available at [http://localhost:5050/](http://localhost:5050/), please wait for it, it takes some time to become active.
+It is available at [http://localhost:5050/](http://localhost:5050/).
 
 Credentials:
 
