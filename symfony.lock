@@ -11,6 +11,18 @@
             "config/packages/broadway.yaml"
         ]
     },
+    "broadway/event-store-dbal": {
+        "version": "0.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "0.2",
+            "ref": "a8e44b60058a2798f65be93037aa1562f4de60eb"
+        },
+        "files": [
+            "config/packages/broadway_event_store_dbal.yaml"
+        ]
+    },
     "doctrine/doctrine-bundle": {
         "version": "2.13",
         "recipe": {

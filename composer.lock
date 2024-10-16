@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f338e1882e63c6c670c5db9caf1af18",
+    "content-hash": "28cee0707756498e46e993be66180603",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -312,6 +312,80 @@
                 "source": "https://github.com/broadway/broadway-bundle/tree/0.7.0"
             },
             "time": "2024-03-28T10:17:47+00:00"
+        },
+        {
+            "name": "broadway/event-store-dbal",
+            "version": "0.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/broadway/event-store-dbal.git",
+                "reference": "7cc0b51cdd8312c4f8919d3b2f6688d85b65cc58"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/broadway/event-store-dbal/zipball/7cc0b51cdd8312c4f8919d3b2f6688d85b65cc58",
+                "reference": "7cc0b51cdd8312c4f8919d3b2f6688d85b65cc58",
+                "shasum": ""
+            },
+            "require": {
+                "broadway/broadway": "^2.3.1",
+                "doctrine/dbal": "^3.1",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "broadway/coding-standard": "^1.2",
+                "ext-pdo_sqlite": "*",
+                "phpstan/phpstan": "@stable",
+                "phpunit/phpunit": "^9.5",
+                "ramsey/uuid": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Broadway\\EventStore\\Dbal\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander",
+                    "email": "iam.asm89@gmail.com"
+                },
+                {
+                    "name": "Emil",
+                    "email": "emil@broekmeulen.com"
+                },
+                {
+                    "name": "Fritsjan",
+                    "email": "fritsjan@qandidate.com"
+                },
+                {
+                    "name": "othillo",
+                    "email": "othillo@othillo.nl"
+                },
+                {
+                    "name": "Willem-Jan",
+                    "email": "wjzijderveld@gmail.com"
+                },
+                {
+                    "name": "Qandidate.com",
+                    "homepage": "http://labs.qandidate.com/"
+                }
+            ],
+            "description": "Event store implementation using doctrine/dbal",
+            "support": {
+                "issues": "https://github.com/broadway/event-store-dbal/issues",
+                "source": "https://github.com/broadway/event-store-dbal/tree/0.6.0"
+            },
+            "time": "2021-06-24T09:42:53+00:00"
         },
         {
             "name": "broadway/uuid-generator",

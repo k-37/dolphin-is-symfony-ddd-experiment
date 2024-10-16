@@ -6,11 +6,23 @@
 parameters:
 
 services:
+    # Needed since `symfony/dependency-injection` 5.1
+    Symfony\Component\DependencyInjection\ContainerInterface: '@service_container'
+
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         public: false
+        bind:
+          $eventBus: '@broadway.event_handling.event_bus'
+          $eventStore: '@Broadway\EventStore\Dbal\DBALEventStore'
+
+    _instanceof:
+        App\Shared\Application\Command\CommandHandlerInterface:
+          public: true
+          tags:
+            - { name: messenger.message_handler, bus: messenger.bus.command }
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -21,5 +33,15 @@ services:
         resource: '../src/UI/*'
         exclude: '../src/UI/**/{EventSubscriber}'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\Shared\Infrastructure\Bus\Command\MessengerCommandBus:
+        arguments:
+          - '@messenger.bus.command'
+
+    Broadway\EventStore\Dbal\DBALEventStore:
+        public: true
+        arguments:
+          - '@doctrine.dbal.default_connection'
+          - '@broadway.serializer.payload'
+          - '@broadway.serializer.metadata'
+          - 'events'
+          - false
