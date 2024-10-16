@@ -47,9 +47,11 @@ bash: ## Connect to the FrankenPHP container via bash so up and down arrows go t
 	@$(PHP_CONT) bash
 
 test: ## Start tests with phpunit, pass the parameter "c=" to add options to phpunit, example: make test c="--group e2e --stop-on-failure"
+	@$(DOCKER_COMP) exec -e APP_ENV=test php bin/console doctrine:database:drop --force || true
+	@$(DOCKER_COMP) exec -e APP_ENV=test php bin/console doctrine:database:create
+	@$(DOCKER_COMP) exec -e APP_ENV=test php bin/console doctrine:migrations:migrate -n
 	@$(eval c ?=)
 	@$(DOCKER_COMP) exec -e APP_ENV=test php bin/phpunit $(c)
-
 
 ## —— Composer 🧙 ——————————————————————————————————————————————————————————————
 composer: ## Run composer, pass the parameter "c=" to run a given command, example: make composer c='req symfony/orm-pack'
