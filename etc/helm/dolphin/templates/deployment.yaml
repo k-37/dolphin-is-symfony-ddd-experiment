@@ -88,26 +88,26 @@ spec:
                 configMapKeyRef:
                   name: {{ include "dolphin.fullname" . }}
                   key: caddy-global-options
-            # - name: MERCURE_URL
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       name: {{ include "dolphin.fullname" . }}
-            #       key: mercure-url
-            # - name: MERCURE_PUBLIC_URL
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       name: {{ include "dolphin.fullname" . }}
-            #       key: mercure-public-url
-            # - name: MERCURE_EXTRA_DIRECTIVES
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       name: {{ include "dolphin.fullname" . }}
-            #       key: mercure-extra-directives
-            # - name: MERCURE_JWT_SECRET
-            #   valueFrom:
-            #     secretKeyRef:
-            #       name: {{ include "dolphin.fullname" . }}
-            #       key: mercure-jwt-secret
+            - name: MERCURE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "dolphin.fullname" . }}
+                  key: mercure-url
+            - name: MERCURE_PUBLIC_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "dolphin.fullname" . }}
+                  key: mercure-public-url
+            - name: MERCURE_EXTRA_DIRECTIVES
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "dolphin.fullname" . }}
+                  key: mercure-extra-directives
+            - name: MERCURE_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "dolphin.fullname" . }}
+                  key: mercure-jwt-secret
           ports:
             - name: http
               containerPort: 80
