@@ -37,20 +37,34 @@ class Version20241016013214 extends AbstractMigration implements ContainerAwareI
 
     public function up(Schema $schema): void
     {
-        $this->eventStore->configureSchema($schema);
+        $this->em->getConnection()->beginTransaction();
 
-        $this->em->flush();
+        try {
+            $this->eventStore->configureSchema($schema);
+            $this->em->flush();
+            $this->em->getConnection()->commit();
+        } catch (Exception $e) {
+            $this->em->getConnection()->rollBack();
+            throw $e;
+        }
     }
 
     public function down(Schema $schema): void
     {
-        $schema->dropTable('events');
+        $this->em->getConnection()->beginTransaction();
 
-        $this->em->flush();
+        try {
+            $schema->dropTable('events');
+            $this->em->flush();
+            $this->em->getConnection()->commit();
+        } catch (Exception $e) {
+            $this->em->getConnection()->rollBack();
+            throw $e;
+        }
     }
 
     public function isTransactional(): bool
     {
-        return false;
+        return true;
     }
 }
