@@ -1,5 +1,8 @@
 /.idea
 
+/etc/helm/dolphin/charts/*
+!/etc/helm/dolphin/charts/.gitignore
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
