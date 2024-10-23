@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace UI\Http\Web\Form\Model;
 
+use App\User\Domain\ValueObject\Auth\HashedPassword;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class SignUpModel
@@ -13,7 +14,7 @@ class SignUpModel
     protected string $email;
 
     #[Assert\NotBlank]
-    #[Assert\Length(min: 6, max: 255)]
+    #[Assert\Length(min: HashedPassword::MINIMAL_LENGTH, max: 255)]
     protected string $password;
 
     public function getEmail(): string

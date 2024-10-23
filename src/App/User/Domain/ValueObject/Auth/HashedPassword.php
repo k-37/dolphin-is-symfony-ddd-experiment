@@ -13,6 +13,7 @@ use RuntimeException;
 final class HashedPassword implements \Stringable
 {
     public const COST = 12;
+    public const MINIMAL_LENGTH = 6;
 
     private function __construct(private readonly string $hashedPassword)
     {
@@ -41,7 +42,11 @@ final class HashedPassword implements \Stringable
      */
     private static function hash(string $plainPassword): string
     {
-        Assertion::minLength($plainPassword, 6, 'Min 6 characters password');
+        Assertion::minLength(
+            $plainPassword,
+            self::MINIMAL_LENGTH,
+            \sprintf('Minimal %d characters password', self::MINIMAL_LENGTH)
+        );
 
         /** @var string|bool|null $hashedPassword */
         $hashedPassword = \password_hash($plainPassword, PASSWORD_BCRYPT, ['cost' => self::COST]);
