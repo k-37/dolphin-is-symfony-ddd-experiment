@@ -6,8 +6,10 @@ namespace UI\Http\Web\Controller;
 
 use App\Shared\Application\Command\CommandBusInterface;
 use App\User\Application\Command\SignUp\SignUpCommand;
+use App\User\Domain\Exception\EmailAlreadyExistException;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -34,9 +36,14 @@ class SignUpController extends AbstractController
                 $model->getEmail(),
                 $model->getPassword(),
             );
-            $this->commandBus->dispatch($command);
 
-            return $this->redirectToRoute('app_home');
+            try {
+                $this->commandBus->dispatch($command);
+
+                return $this->redirectToRoute('app_home');
+            } catch (EmailAlreadyExistException $exception) {
+                $form->get('email')->addError(new FormError('Email already registered.'));
+            }
         }
 
         return $this->render('security/signup.html.twig', [
