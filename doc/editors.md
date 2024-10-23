@@ -1,4 +1,6 @@
-# PhpStorm
+# Editors and IDEs configuration
+
+## PhpStorm
 
 ### Debugging
 
