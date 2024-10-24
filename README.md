@@ -70,6 +70,7 @@ Everything here is heavily influenced by these great projects:
 - [Symfony Docker](https://github.com/dunglas/symfony-docker)
 - [API Platform](https://api-platform.com/)
 - [jorge07/symfony-6-es-cqrs-boilerplate](https://github.com/jorge07/symfony-6-es-cqrs-boilerplate)
+- [Pico CSS](https://picocss.com/)
 
 Big thank you for all the ~~fish~~ lessons goes to them. 🙏
 

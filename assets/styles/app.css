@@ -1,3 +1,13 @@
-body {
-    background-color: skyblue;
+html {
+    background-color: ghostwhite;
+}
+
+header {
+    background-color: yellow;
+}
+
+footer {
+    background-color: yellow;
+    position: fixed;
+    bottom: 0;
 }
