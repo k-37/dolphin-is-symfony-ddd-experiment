@@ -20,7 +20,7 @@ class EmailTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        Email::fromString('asd');
+        Email::fromString('invalid@');
     }
 
     /**
@@ -32,9 +32,9 @@ class EmailTest extends TestCase
      */
     public function valid_email_should_be_able_to_convert_to_string(): void
     {
-        $email = Email::fromString('an@email.com');
+        $email = Email::fromString('valid@example.com');
 
-        self::assertSame('an@email.com', $email->toString());
-        self::assertSame('an@email.com', (string) $email);
+        self::assertSame('valid@example.com', $email->toString());
+        self::assertSame('valid@example.com', (string) $email);
     }
 }

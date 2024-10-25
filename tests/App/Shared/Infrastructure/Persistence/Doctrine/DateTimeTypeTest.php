@@ -13,9 +13,9 @@ use Doctrine\DBAL\Exception;
 
 class DateTimeTypeTest extends TestCase
 {
-    final public const TYPE = 'lol';
+    final public const TYPE = 'type';
 
-    final public const BAD_DATE = 'lol';
+    final public const BAD_DATE = 'invalid';
 
     private \Doctrine\DBAL\Types\Type $dateTimeType;
 

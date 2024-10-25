@@ -29,7 +29,7 @@ class UserTest extends TestCase implements UniqueEmailSpecificationInterface
      */
     public function given_a_valid_email_it_should_create_a_user_instance(): void
     {
-        $emailString = 'lol@aso.maximo';
+        $emailString = 'valid@example.com';
 
         $user = User::create(
             Uuid::uuid4(),

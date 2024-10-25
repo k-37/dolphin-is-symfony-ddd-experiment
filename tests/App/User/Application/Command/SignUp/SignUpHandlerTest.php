@@ -24,7 +24,7 @@ class SignUpHandlerTest extends ApplicationTestCase
     public function command_handler_must_fire_domain_event(): void
     {
         $uuid = Uuid::uuid4();
-        $email = 'asd@asd.asd';
+        $email = 'test@example.com';
 
         $command = new SignUpCommand($uuid->toString(), $email, 'password');
         $this
