@@ -54,6 +54,11 @@ services:
       /entrypoint.sh
       "
 
+  amqp:
+    ports:
+      - "5672"
+      - "${RABBITMQ_MANAGEMENT_PORT:-15672}:15672"
+
 ###> symfony/mailer ###
   mailer:
     image: axllent/mailpit

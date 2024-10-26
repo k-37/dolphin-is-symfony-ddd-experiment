@@ -65,6 +65,13 @@ services:
       # It might not work if `pgadmin` user with `uid=5050` which is used in contaner can't write in that directory on host file system.
       # - ./docker/db_mng:/var/lib/pgadmin:rw
 
+  amqp:
+    image: rabbitmq:${RABBITMQ_VERSION:-4.0.2-management}
+    environment:
+      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE:-I1FYChw4imbde6TKf08CU2WK4j7f9AptkZ/8hUtn}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-admin}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-!ChangeMe!}
+
 volumes:
   caddy_data:
   caddy_config:

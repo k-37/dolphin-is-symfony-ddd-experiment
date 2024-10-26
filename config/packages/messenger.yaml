@@ -7,13 +7,16 @@ framework:
             async:
                 dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
                 options:
-                    use_notify: true
-                    check_delayed_interval: 60000
+                    auto_setup: false
                 retry_strategy:
                     max_retries: 3
                     multiplier: 2
-            failed: 'doctrine://default?queue_name=failed'
-            # sync: 'sync://'
+            failed:
+                dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
+                options:
+                    queues:
+                        failed:
+                            binding_keys: ['#']
 
         default_bus: messenger.bus.command
 
