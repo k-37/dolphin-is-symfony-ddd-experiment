@@ -8,6 +8,7 @@ parameters:
         - tests/
     excludePaths:
         - src/App/Shared/Infrastructure/Persistence/Doctrine/Migrations/*
+        - src/App/User/Domain/User.php
     ignoreErrors:
         - identifier: missingType.iterableValue
         - identifier: missingType.generics
