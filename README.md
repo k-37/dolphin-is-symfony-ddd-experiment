@@ -57,6 +57,8 @@ Credentials:
 | Execute Symfony console command                          | `make sf c='<COMMAND>'`, e.g. `make sf c='about'` |
 | Run architectural layers analysis with Deptrac           | `make ala`                                        |
 | Run static code analysis with PHPStan                    | `make sca`                                        |
+| Run coding standard analysis with Easy Coding Standard   | `make csa`                                        |
+| Fix coding standard with Easy Coding Standard            | `make csf`                                        |
 
 # Documentation
 
