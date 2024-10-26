@@ -13,3 +13,9 @@
 - On `File > Settings > PHP > Test Frameworks` click on `+` and select remote interpreter. For the option `Path to script` we **must type** absolute path inside container `/app/vendor/autoload.php` and click refresh button on the right side, for the option `Default configuration file` **type** `/app/phpunit.xml.dist`. The bootstrap file can be skipped because it will be guessed from the config file.
 
 [Detailed instructions with pictures](https://medium.com/the-sensiolabs-tech-blog/phpstorm-docker-ccc4ce9a0b8e). 📸️
+
+### Quality tools
+
+#### PHPStan
+
+- [Configuration and usage with PhpStorm](https://www.jetbrains.com/help/phpstorm/using-phpstan.html).

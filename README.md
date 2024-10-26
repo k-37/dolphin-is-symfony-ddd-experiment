@@ -56,6 +56,7 @@ Credentials:
 | Remove all the containers, networks, volumes and images  | `make destroy`                                    |
 | Execute Symfony console command                          | `make sf c='<COMMAND>'`, e.g. `make sf c='about'` |
 | Run architectural layers analysis with Deptrac           | `make ala`                                        |
+| Run static code analysis with PHPStan                    | `make sca`                                        |
 
 # Documentation
 

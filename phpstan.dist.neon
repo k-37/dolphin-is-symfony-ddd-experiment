@@ -1,0 +1,13 @@
+parameters:
+    level: 6
+    paths:
+        - bin/
+        - config/
+        - public/
+        - src/
+        - tests/
+    excludePaths:
+        - src/App/Shared/Infrastructure/Persistence/Doctrine/Migrations/*
+    ignoreErrors:
+        - identifier: missingType.iterableValue
+        - identifier: missingType.generics

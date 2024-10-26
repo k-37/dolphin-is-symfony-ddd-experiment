@@ -11,7 +11,7 @@ SYMFONY  = $(PHP) bin/console
 
 # Misc
 .DEFAULT_GOAL = help
-.PHONY        : help build up down rebuild restart ownership destroy logs sh composer vendor sf cc check test ala
+.PHONY        : help build up down rebuild restart ownership destroy logs sh composer vendor sf cc check test ala sca
 
 ## —— 🎵 🐳 The Symfony Docker Makefile 🐳 🎵 ——————————————————————————————————
 help: ## Outputs this help screen
@@ -65,7 +65,7 @@ cc: sf
 
 ## —— Tools 🧰 —————————————————————————————————————————————————————————————————
 
-check: cc test ala ## Check project for errors, run tests, static code analysis, etc.
+check: cc test ala sca ## Check project for errors, run tests, static code analysis, etc.
 
 test: ## Start tests with phpunit, pass the parameter "c=" to add options to phpunit, example: make test c="--group e2e --stop-on-failure"
 	@$(DOCKER_COMP) exec -e APP_ENV=test php bin/console doctrine:database:drop --force || true
@@ -76,3 +76,6 @@ test: ## Start tests with phpunit, pass the parameter "c=" to add options to php
 
 ala: ## Architectural layers analysis
 	@$(DOCKER_COMP) exec -e APP_ENV=test php vendor/bin/deptrac
+
+sca: ## Static code analysis
+	@$(DOCKER_COMP) exec -e APP_ENV=test php vendor/bin/phpstan analyse src tests --memory-limit 512M
