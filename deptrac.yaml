@@ -5,26 +5,56 @@ deptrac:
         - '#.*test.*#'
     layers:
         -
-            name: Controller
+            name: Domain
             collectors:
                 -
                     type: classLike
-                    value: .*Controller.*
+                    value: .*\\Domain\\.*
         -
-            name: Repository
+            name: Application
             collectors:
                 -
                     type: classLike
-                    value: .*Repository.*
+                    value: .*\\Application\\.*
         -
-            name: Service
+            name: Infrastructure
+            collectors:
+                -
+                    type: bool
+                    must:
+                        -
+                            type: classLike
+                            value: .*\\Infrastructure\\.*
+                    must_not:
+                        -
+                            type: classLike
+                            value: .*\\User\\Infrastructure\\Auth\\Auth
+        -
+            name: Auth
             collectors:
                 -
                     type: classLike
-                    value: .*Service.*
+                    value: .*\\User\\Infrastructure\\Auth\\Auth
+        -
+            name: UI
+            collectors:
+                -
+                    type: classLike
+                    value: UI\\.*
     ruleset:
-        Controller:
-            - Service
-        Service:
-            - Repository
-        Repository:
+        Domain:
+        Application:
+            - Domain
+            - Infrastructure
+            - Auth
+        Infrastructure:
+            - Domain
+            - Application
+            - Auth
+        Auth:
+            - Domain
+            - Infrastructure
+        UI:
+            - Domain
+            - Application
+            - Auth
