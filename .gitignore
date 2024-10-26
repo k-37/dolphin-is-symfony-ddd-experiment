@@ -27,3 +27,7 @@
 /public/assets/
 /assets/vendor/
 ###< symfony/asset-mapper ###
+
+###> qossmic/deptrac ###
+/.deptrac.cache
+###< qossmic/deptrac ###
