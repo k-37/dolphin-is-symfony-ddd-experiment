@@ -34,8 +34,8 @@ It is available at [http://localhost:5050/](http://localhost:5050/).
 
 Credentials:
 
-- `Email Address / Username`: `admin@example.com`
-- `Password`: `!ChangeMe!`
+- **Email Address / Username**: `admin@example.com`
+- **Password**: `!ChangeMe!`
 
 ### [Mailpit](https://mailpit.axllent.org/) - email & SMTP testing tool with API for developers
 
