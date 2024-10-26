@@ -9,7 +9,6 @@ use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
 use PHPUnit\Framework\TestCase;
-use Doctrine\DBAL\Exception;
 
 class DateTimeTypeTest extends TestCase
 {
