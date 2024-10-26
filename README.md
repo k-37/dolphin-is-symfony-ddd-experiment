@@ -37,6 +37,10 @@ Credentials:
 - `Email Address / Username`: `admin@example.com`
 - `Password`: `!ChangeMe!`
 
+### [Mailpit](https://mailpit.axllent.org/) - email & SMTP testing tool with API for developers
+
+It is available at [http://localhost:8025/](http://localhost:8025/).
+
 ## Commands which can be executed from the project root folder
 
 |                          Action                          |                      Command                      |
