@@ -18,7 +18,7 @@ To build Docker images, after cloning current repository in the project root exe
 
 To install Symfony inside Docker container and start the application:
 
-    make up logs
+    make up
 
 `make up` will install Symfony only if it is not already installed.
 
