@@ -4,13 +4,20 @@ framework:
 
         transports:
             # https://symfony.com/doc/current/messenger.html#transport-configuration
-            async:
+            events:
                 dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
                 options:
-                    auto_setup: false
+                    exchange:
+                        type: topic
+                        name: events
+                    queues:
+                        events:
+                            binding_keys: ['#']
                 retry_strategy:
+                    delay: 2000
                     max_retries: 3
                     multiplier: 2
+                    max_delay: 0
             failed:
                 dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
                 options:
@@ -25,3 +32,9 @@ framework:
                 default_middleware: false
                 middleware:
                     - handle_message
+
+            messenger.bus.event.async:
+                default_middleware: allow_no_handlers
+
+        routing:
+            'Broadway\Domain\DomainMessage': events
