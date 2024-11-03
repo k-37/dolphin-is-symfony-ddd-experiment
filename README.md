@@ -43,7 +43,7 @@ It is available at [http://localhost:8025/](http://localhost:8025/).
 
 ### [RabbitMQ](https://www.rabbitmq.com/) - a reliable and mature messaging and streaming broker
 
-It is available at [http://localhost:15672/](http://localhost:15672/).
+RabbitMQ Management (UI) is available at [http://localhost:15672/](http://localhost:15672/).
 
 Credentials:
 

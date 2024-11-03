@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "dolphin.fullname" . }}
+  name: {{ include "dolphin.fullname" . }}-workers
   labels:
-    {{- include "dolphin.labels" . | nindent 4 }}
+    {{- include "dolphin.labels" . | nindent 4 }}-workers
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "dolphin.selectorLabels" . | nindent 6 }}
+      {{- include "dolphin.selectorLabels" . | nindent 6 }}-workers
   template:
     metadata:
       annotations:
@@ -20,7 +20,7 @@ spec:
           {{- toYaml . | nindent 8 }}
         {{- end }}
       labels:
-        {{- include "dolphin.selectorLabels" . | nindent 8 }}
+        {{- include "dolphin.selectorLabels" . | nindent 8 }}-workers
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -30,34 +30,15 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}-php
+        - name: {{ .Chart.Name }}-php-worker-events
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.php.image.repository }}:{{ .Values.php.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.php.image.pullPolicy }}
+          command: ['/app/bin/console', 'messenger:consume', 'events', '-vvv', '--time-limit=60', '--limit=10', '--memory-limit=128M']
           env:
-            - name: SERVER_NAME
-              value: :80
-            - name: MERCURE_PUBLISHER_JWT_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "dolphin.fullname" . }}
-                  key: mercure-jwt-secret
-            - name: MERCURE_SUBSCRIBER_JWT_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "dolphin.fullname" . }}
-                  key: mercure-jwt-secret
-            - name: TRUSTED_HOSTS
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ include "dolphin.fullname" . }}
-                  key: php-trusted-hosts
-            - name: TRUSTED_PROXIES
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ include "dolphin.fullname" . }}
-                  key: php-trusted-proxies
+            - name: RUN_MIGRATIONS
+              value: "false"
             - name: APP_ENV
               valueFrom:
                 configMapKeyRef:
@@ -73,11 +54,6 @@ spec:
                 secretKeyRef:
                   name: {{ include "dolphin.fullname" . }}
                   key: php-app-secret
-            - name: CORS_ALLOW_ORIGIN
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ include "dolphin.fullname" . }}
-                  key: php-cors-allow-origin
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
@@ -93,50 +69,20 @@ spec:
                 secretKeyRef:
                   name: {{ include "dolphin.fullname" . }}
                   key: mailer-dsn
-            - name: CADDY_GLOBAL_OPTIONS
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ include "dolphin.fullname" . }}
-                  key: caddy-global-options
-            - name: MERCURE_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ include "dolphin.fullname" . }}
-                  key: mercure-url
-            - name: MERCURE_PUBLIC_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ include "dolphin.fullname" . }}
-                  key: mercure-public-url
-            - name: MERCURE_EXTRA_DIRECTIVES
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ include "dolphin.fullname" . }}
-                  key: mercure-extra-directives
-            - name: MERCURE_JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "dolphin.fullname" . }}
-                  key: mercure-jwt-secret
-          ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-            - name: admin
-              containerPort: 2019
-              protocol: TCP
           lifecycle:
             preStop:
               exec:
                 command: ["/bin/sh", "-c", "/bin/sleep 1; kill -QUIT 1"]
           readinessProbe:
-            tcpSocket:
-              port: 80
+            exec:
+              command:
+              - 'true'
             initialDelaySeconds: 3
             periodSeconds: 3
           livenessProbe:
-            tcpSocket:
-              port: 80
+            exec:
+              command:
+              - 'true'
             initialDelaySeconds: 3
             periodSeconds: 3
           resources:

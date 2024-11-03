@@ -2,5 +2,11 @@ dependencies:
 - name: postgresql
   repository: https://charts.bitnami.com/bitnami/
   version: 15.5.38
-digest: sha256:248000bf4e37de05c3313f80b1766d5c81230fe448676fe285328ba4e91170c1
-generated: "2024-10-18T19:43:05.479461997+02:00"
+- name: rabbitmq
+  repository: https://charts.bitnami.com/bitnami
+  version: 15.0.5
+- name: mailpit
+  repository: https://jouve.github.io/charts/
+  version: 0.18.4
+digest: sha256:e823647d9b390cee483a9e44309ffcf85a3c62d4b6424e4fc5540fe6f7b45f28
+generated: "2024-11-03T07:19:20.14033452+01:00"

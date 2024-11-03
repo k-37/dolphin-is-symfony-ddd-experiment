@@ -31,7 +31,7 @@ mercure:
 postgresql:
   enabled: true
   # If bringing your own PostgreSQL, the full uri to use
-  #url: postgresql://app:!ChangeMe!@database:5432/api?serverVersion=13&charset=utf8
+  #url: postgresql://app:!ChangeMe!@database:5432/api?serverVersion=16&charset=utf8
   global:
     postgresql:
       auth:
@@ -53,6 +53,24 @@ postgresql:
       requests:
         memory: 50Mi
         cpu: 1m
+
+rabbitmq:
+  enabled: true
+  # If bringing your own RabbitMQ, the full uri to use
+  #url: amqp://admin:!ChangeMe!@amqp:5672/%2f/messages
+  auth:
+    username: "admin"
+    password: "!ChangeMe!"
+    erlangCookie: "QLlBhFNQSynjzXSa5D6kKIBcExSPdAkO8M6mKnKs"
+
+mailpit:
+  enabled: true
+  service:
+    smtp:
+      port: 1025
+
+# If bringing your own mailer, the full uri to use
+#mailer: smtp://mailer:1025
 
 imagePullSecrets: []
 nameOverride: ""

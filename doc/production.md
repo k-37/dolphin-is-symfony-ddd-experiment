@@ -48,13 +48,39 @@ Push the image to the Docker registry installed in minikube:
 
 To fetch Helm chart dependencies, from the project root, execute following as a single command:
 
-    helm repo add postgresql https://charts.bitnami.com/bitnami/ \
-    && helm dependency build etc/helm/dolphin
+    helm repo add bitnami https://charts.bitnami.com/bitnami/ \
+        && helm repo add jouve https://jouve.github.io/charts/ \
+        && helm dependency build etc/helm/dolphin
 
 Deploy the project using the Helm chart by running, as a single command, from the project root:
 
-    helm install dolphin etc/helm/dolphin \
+    helm upgrade --install dolphin etc/helm/dolphin \
         --set php.image.repository=localhost:5000/php \
         --set php.image.tag=latest
 
 Copy and paste the commands displayed in the terminal to enable the port forwarding then go to [http://localhost:8080](http://localhost:8080) to access the application running in minikube cluster. Give it some time to start.
+
+#### Mailpit
+
+To access Mailpit which is running inside minikube execute commands:
+
+    export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/name=mailpit,app.kubernetes.io/instance=dolphin" -o jsonpath="{.items[0].metadata.name}")
+    export CONTAINER_PORT=$(kubectl get pod --namespace default $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+    kubectl --namespace default port-forward $POD_NAME 8026:$CONTAINER_PORT
+
+It will be available at [http://127.0.0.1:8026/](http://127.0.0.1:8026/).
+
+#### RabbitMQ Management (UI)
+
+To access RabbitMQ Management which is running inside minikube execute commands:
+
+    export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/name=rabbitmq,app.kubernetes.io/instance=dolphin" -o jsonpath="{.items[0].metadata.name}")
+    export CONTAINER_PORT=$(kubectl get pod --namespace default $POD_NAME -o jsonpath="{.spec.containers[0].ports[2].containerPort}")
+    kubectl --namespace default port-forward $POD_NAME 15673:$CONTAINER_PORT
+
+It will be available at [http://127.0.0.1:15673/](http://127.0.0.1:15673/).
+
+Credentials:
+
+- **Username**: `admin`
+- **Password**: `!ChangeMe!`
