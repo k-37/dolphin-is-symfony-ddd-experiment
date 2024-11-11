@@ -19,3 +19,49 @@
 #### PHPStan
 
 - [Configuration and usage with PhpStorm](https://www.jetbrains.com/help/phpstorm/using-phpstan.html).
+
+## Visual Studio Code
+
+### Debugging
+
+#### Requirements
+
+- PHP Debug (`xdebug.php-debug`) extension for VSCode by *Xdebug*.
+
+#### Setup
+
+Create file `.vscode/launch.json` with contents:
+
+    {
+        // Use IntelliSense to learn about possible attributes.
+        // Hover to view descriptions of existing attributes.
+        // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Listen for Xdebug",
+                "type": "php",
+                "request": "launch",
+                "port": 9003,
+                "pathMappings": {
+                    "/app": "${workspaceRoot}"
+                }
+            }
+        ]
+    }
+
+To make it possible to go directly to a line and file in VSCode by clicking on the filenames that Xdebug shows in stack traces in Symfony Profiler in `./etc/frankenphp/conf.d/20-app.dev.ini` comment out line starting with `xdebug.file_link_format=` and add this bellow it:
+
+    xdebug.file_link_format='vscode://file/%f:%l&/app><PATH_TO_APP_ON_HOST>'
+
+Path to app in container `/app` will be mapped to `<PATH_TO_APP_ON_HOST>` outside container.
+
+After making changes to `20-app.dev.ini` run `make restart`.
+
+#### Debug
+
+In VSCode [set breakpoint](https://code.visualstudio.com/docs/editor/debugging#_breakpoints), after that in menu click on `Run > Start Debugging`.
+
+Add the `XDEBUG_SESSION=1` query parameter to the URL of the page you want to debug (e.g. [http://localhost/?XDEBUG_SESSION=1](http://localhost/?XDEBUG_SESSION=1)), or use [other available triggers](https://xdebug.org/docs/step_debug#activate_debugger)
+
+Alternatively, you can use [the **Xdebug extension**](https://xdebug.org/docs/step_debug#browser-extensions) for your preferred web browser.
