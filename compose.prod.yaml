@@ -10,8 +10,18 @@ services:
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET}
 
   php-worker:
+    profiles:
+      - donotstart
+
+  php-worker-events:
+    extends:
+      file: compose.yaml
+      service: php-worker
+    image: ${IMAGES_PREFIX:-}app-php-worker-events
     build:
       context: .
       target: frankenphp_prod
-    environment:
-      APP_SECRET: ${APP_SECRET}
+    command: ['bin/console', 'messenger:consume', 'events', '-vvv', '--time-limit=60', '--limit=10', '--memory-limit=128M']
+    depends_on:
+      php:
+        condition: service_healthy

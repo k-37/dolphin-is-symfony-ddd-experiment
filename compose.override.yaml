@@ -32,7 +32,7 @@ services:
     build:
       context: .
       target: frankenphp_dev
-    command: ['/app/bin/console', 'messenger:consume', 'events', '-vvv', '--time-limit=60', '--limit=10', '--memory-limit=128M']
+    command: ['bin/console', 'messenger:consume', 'events', '-vvv', '--time-limit=60', '--limit=10', '--memory-limit=128M']
     volumes:
       - ./:/app
       - /app/var/

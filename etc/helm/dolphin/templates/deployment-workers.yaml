@@ -35,7 +35,7 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.php.image.repository }}:{{ .Values.php.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.php.image.pullPolicy }}
-          command: ['/app/bin/console', 'messenger:consume', 'events', '-vvv', '--time-limit=60', '--limit=10', '--memory-limit=128M']
+          command: ['bin/console', 'messenger:consume', 'events', '-vvv', '--time-limit=60', '--limit=10', '--memory-limit=128M']
           env:
             - name: RUN_MIGRATIONS
               value: "false"
